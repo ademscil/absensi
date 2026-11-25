@@ -56,7 +56,7 @@ function MainAppShell() {
   return (
     <div className="app-shell min-h-[100dvh] flex flex-col bg-slate-50 text-slate-800 relative z-0">
       <div className="fixed inset-0 pointer-events-none opacity-20 overflow-hidden">
-        <SpatialBackground data-testid="spatial-background" />
+        <SpatialBackground data-testid="spatial-background" showPlanet={false} />
       </div>
 
       {/* Persistent Shell Header */}

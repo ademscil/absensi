@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { User, Lock, Eye, EyeOff, Orbit } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useTenant } from '../../context/TenantContext.jsx';
 import { SpatialBackground } from '../common/SpatialBackground.jsx';
@@ -10,16 +11,13 @@ import {
 } from '../../utils/animations.js';
 
 /**
- * LoginView - High-fidelity Split-Screen Animated Login Experience
+ * LoginView - High-Fidelity Split Screen Login modeled directly after Astra SATSET (10.14.181.239:3000) & EMONDAY
  * Features:
- * - Enterprise Split-Screen layout (Hero showcase on left, clean white form card on right)
- * - Eliminates awkward centered box floating on empty background
- * - Full responsive mobile stacking (seamless native app feel on small screens)
- * - Anime.js choreographed entry sequence
- * - Tenant branding (logo, colors, domain-specific labels)
- * - Role toggle selector (Karyawan vs Admin HR)
- * - Evaluator demo credential quick-fill and instant login
- * - Real error states and accessible form inputs
+ * - Left Side: Astra deep corporate blue diagonal showcase with interactive 3D Saturn planet, rings, and floating neon wireframe polyhedra
+ * - Right Side: Clean, pure, luminous white background with circular badge logo, "Welcome / Sign in to...", soft rounded inputs with icons, and bold primary action button
+ * - "MOVE YOUR CURSOR — THE PLANET FOLLOWS" interactive feedback
+ * - "AKURASI DATA • VERIFIKASI REAL-TIME • TRANSPARANSI KERJA" bottom branding
+ * - Evaluator demo quick-fill pills & instant login
  */
 export function LoginView({
   'data-testid': testId = 'login-view',
@@ -31,6 +29,7 @@ export function LoginView({
   const [selectedRole, setSelectedRole] = useState('karyawan'); // 'karyawan' | 'admin'
   const [nikOrEmail, setNikOrEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -66,7 +65,6 @@ export function LoginView({
   const handleRoleToggle = (role) => {
     setSelectedRole(role);
     setErrorMessage('');
-    // If switching role, clear or set demo account for convenience
     if (role === 'admin' && nikOrEmail.startsWith('EMP-')) {
       setNikOrEmail('');
       setPassword('');
@@ -120,106 +118,123 @@ export function LoginView({
     <div
       ref={containerRef}
       data-testid={testId}
-      className={`login-view min-h-[100dvh] w-full flex flex-col lg:flex-row relative bg-slate-50 text-slate-800 ${className}`}
+      className={`login-view min-h-[100dvh] w-full flex flex-col lg:flex-row relative bg-white text-slate-800 overflow-x-hidden ${className}`}
     >
-      {/* LEFT SIDE: Hero Showcase (Desktop 50%) */}
-      <div className="lg:w-1/2 hidden lg:flex flex-col justify-between p-12 lg:p-16 bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white relative overflow-hidden z-10">
-        {/* Ambient Spatial Particle Layer */}
-        <SpatialBackground data-testid="spatial-background" className="opacity-40" />
+      {/* LEFT COLUMN: SATSET Branded Showcase with Angled Diagonal Split (Desktop 54%) */}
+      <div className="lg:w-[54%] hidden lg:flex flex-col justify-between p-10 lg:p-14 bg-gradient-to-br from-[#07162c] via-[#0b2447] to-[#12386e] text-white relative overflow-hidden [clip-path:polygon(0_0,100%_0,92%_100%,0_100%)] z-10">
+        {/* Subtle geometric dot grid pattern (Astra EMONDAY / SATSET pattern) */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40 z-0" />
 
-        {/* Ambient Top Light Glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+        {/* Interactive 3D Space Canvas Background with Planet & Wireframe Polyhedra */}
+        <SpatialBackground
+          data-testid="spatial-background"
+          showPlanet={true}
+          planetXRatio={0.52}
+          planetYRatio={0.48}
+          particleCount={55}
+          className="absolute inset-0 z-0"
+        />
 
-        {/* Top Brand Tag */}
-        <div className="flex items-center gap-3 relative z-10">
-          <div
-            className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-md p-2 flex items-center justify-center border border-white/20 shrink-0 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain"
-            dangerouslySetInnerHTML={{ __html: currentTenant.logoSvg }}
-          />
-          <div>
-            <div className="text-sm font-bold tracking-wide">{currentTenant.name}</div>
-            <div className="text-xs text-blue-300 font-medium">{currentTenant.category}</div>
-          </div>
+        {/* Ambient Cosmic Radial Glows */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none z-0" />
+        <div className="absolute top-12 right-12 w-64 h-64 bg-indigo-500/15 rounded-full blur-[100px] pointer-events-none z-0" />
+
+        {/* Top Brand Tag with Celestial Orbit Icon */}
+        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-blue-200 shadow-sm relative z-10 w-fit">
+          <Orbit className="w-4 h-4 text-cyan-400" />
+          <span>{currentTenant.name} &bull; Enterprise Attendance</span>
         </div>
 
-        {/* Hero Headline & Key Value Propositions */}
-        <div className="space-y-8 my-auto py-10 relative z-10 max-w-lg">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-xs font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Sistem Absensi Digital Terintegrasi
+        {/* Center Headline & Showcase */}
+        <div className="my-auto py-8 relative z-10 max-w-lg space-y-6">
+          <div className="space-y-3">
+            <div className="text-xs font-bold text-cyan-300 uppercase tracking-wider">
+              Smart Attendance Platform
+            </div>
+            <h1 className="text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-sm">
+              Sistem Presensi <br />
+              <span className="text-cyan-400 tracking-wide">{currentTenant.name}</span>
+            </h1>
+            <p className="text-sm text-slate-200 leading-relaxed max-w-md">
+              Solusi presensi mandiri dengan verifikasi kamera selfie, stempel anti-fraud WIB & GPS, serta rekapitulasi data ketenagakerjaan yang akurat dan transparan.
+            </p>
           </div>
 
-          <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight text-white">
-            Kelola Kehadiran Kerja Lebih Cepat, Akurat & Transparan.
-          </h1>
-
-          <p className="text-sm text-slate-300 leading-relaxed">
-            Dilengkapi kamera selfie dengan canvas watermark anti-manipulasi waktu WIB, alur persetujuan izin instan oleh HR, serta rekapitulasi data otomatis yang siap diekspor ke Excel.
-          </p>
-
-          {/* Feature Highlights Bento Cards */}
-          <div className="space-y-3 pt-2">
-            <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-lg shrink-0">
+          {/* Bento Feature Cards */}
+          <div className="space-y-2.5 pt-1">
+            <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-sm max-w-md">
+              <div className="w-9 h-9 rounded-xl bg-blue-500/30 text-blue-200 flex items-center justify-center text-base shrink-0 border border-blue-400/30">
                 📷
               </div>
               <div className="text-xs">
-                <div className="font-bold text-white">Selfie Watermark Otomatis</div>
-                <div className="text-slate-300 text-[11px] mt-0.5">Mencap waktu, tanggal, NIK, dan kode verifikasi ke canvas foto.</div>
+                <div className="font-bold text-white">Selfie Watermark Anti-Fraud</div>
+                <div className="text-blue-100 text-[11px]">Stempel waktu WIB, NIK, dan koordinat GPS dicap ke foto.</div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-lg shrink-0">
+            <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 shadow-sm max-w-md">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/30 text-emerald-200 flex items-center justify-center text-base shrink-0 border border-emerald-400/30">
                 ⚡
               </div>
               <div className="text-xs">
                 <div className="font-bold text-white">Approval Izin & Cuti Real-Time</div>
-                <div className="text-slate-300 text-[11px] mt-0.5">Persetujuan cuti/sakit langsung tersinkronisasi tanpa reload halaman.</div>
+                <div className="text-emerald-100 text-[11px]">Notifikasi instan dan pemotongan sisa kuota otomatis oleh HR.</div>
               </div>
             </div>
+          </div>
 
-            <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg shrink-0">
-                📊
-              </div>
-              <div className="text-xs">
-                <div className="font-bold text-white">Rekapitulasi & Ekspor Excel (.xlsx)</div>
-                <div className="text-slate-300 text-[11px] mt-0.5">Filter multi-kriteria tanggal & departemen, download spreadsheet 1-klik.</div>
-              </div>
+          {/* Interactive Cursor Indicator (from 3D reference) */}
+          <div className="pt-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[10px] font-mono tracking-widest text-cyan-200 uppercase shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              MOVE YOUR CURSOR — THE PLANET FOLLOWS
             </div>
           </div>
         </div>
 
-        {/* Footer Meta */}
-        <div className="flex items-center justify-between text-xs text-slate-400 border-t border-white/10 pt-4 relative z-10">
-          <span>&copy; 2026 {currentTenant.name}</span>
-          <span className="text-blue-300 font-medium">Enterprise Ready</span>
+        {/* Enterprise Attendance Operational Pillars & Tagline */}
+        <div className="pt-6 border-t border-white/15 space-y-2 relative z-10">
+          <div className="flex items-center gap-3 text-slate-300 font-bold tracking-wider uppercase text-[10px] sm:text-[11px]">
+            <span>AKURASI DATA</span>
+            <span>&bull;</span>
+            <span>VERIFIKASI REAL-TIME</span>
+            <span>&bull;</span>
+            <span>TRANSPARANSI KERJA</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-white text-[11px] tracking-widest uppercase truncate max-w-md">
+              {currentTenant.tagline || 'Sistem Presensi & Manajemen Ketenagakerjaan'}
+            </span>
+            <span className="h-0.5 w-10 bg-cyan-400 rounded-full shrink-0" />
+          </div>
         </div>
       </div>
 
-      {/* RIGHT SIDE: Clean & Spacious Login Form */}
-      <div className="w-full lg:w-1/2 min-h-screen flex items-center justify-center p-6 sm:p-10 lg:p-12 relative z-10">
+      {/* RIGHT COLUMN: Clean Pure White SATSET Login Form (Desktop 46%, Mobile 100%) */}
+      <div className="w-full lg:w-[46%] min-h-screen flex items-center justify-center p-6 sm:p-12 lg:p-14 bg-white relative z-10">
         <div
           data-testid="login-card"
           role="region"
           aria-label="Formulir Masuk Sistem"
-          className="w-full max-w-md mx-auto p-7 sm:p-9 rounded-3xl border border-slate-200/90 bg-white shadow-xl shadow-slate-200/50"
+          className="w-full max-w-md mx-auto"
         >
-          {/* Header & Brand Logo */}
+          {/* Header & Circular Branded Logo (SATSET Circular Crest Pattern) */}
           <div ref={headerRef} className="text-center mb-6">
-            <div
-              ref={brandCrestRef}
-              data-testid="brand-logo"
-              className="w-14 h-14 sm:w-16 sm:h-16 max-w-full max-h-full object-contain overflow-hidden mx-auto mb-3.5 rounded-2xl p-2 bg-slate-50 border border-slate-100 flex items-center justify-center shadow-sm transition-transform duration-300 hover:scale-105 [&>svg]:w-full [&>svg]:h-full [&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:object-contain"
-              dangerouslySetInnerHTML={{ __html: currentTenant.logoSvg }}
-            />
-            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-              {currentTenant.name}
+            <div className="relative mx-auto mb-4 w-20 h-20 flex items-center justify-center">
+              {/* Glowing Ambient Halo */}
+              <div className="absolute inset-0 rounded-full bg-primary/20 blur-md pointer-events-none" />
+              <div
+                ref={brandCrestRef}
+                data-testid="brand-logo"
+                className="w-14 h-14 sm:w-16 sm:h-16 max-w-full max-h-full object-contain overflow-hidden rounded-full p-2 bg-slate-900 border-2 border-primary/50 flex items-center justify-center shadow-lg relative z-10 transition-transform duration-300 hover:scale-105 [&>svg]:w-full [&>svg]:h-full [&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:object-contain"
+                dangerouslySetInnerHTML={{ __html: currentTenant.logoSvg }}
+              />
+            </div>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+              Masuk ke Sistem
             </h2>
-            <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
-              {currentTenant.tagline}
+            <p className="text-xs text-slate-500 mt-1">
+              Portal Layanan Presensi & HR {currentTenant.name}
             </p>
           </div>
 
@@ -264,65 +279,105 @@ export function LoginView({
           {/* Form */}
           <form ref={formCardRef} onSubmit={handleSubmit} className="space-y-4">
             <div ref={inputsRef} className="space-y-3.5">
+              {/* NIK / Email Input */}
               <div className="form-input-group">
                 <label
                   htmlFor="login-nik"
                   className="block text-xs font-bold text-slate-700 mb-1"
                 >
-                  {labels.idLabel} atau Email
+                  Username / {labels.idLabel}
                 </label>
-                <input
-                  id="login-nik"
-                  name="nikOrEmail"
-                  type="text"
-                  required
-                  value={nikOrEmail}
-                  onChange={(e) => setNikOrEmail(e.target.value)}
-                  placeholder={`Masukkan ${labels.idLabel} (cth: ${
-                    selectedRole === 'admin' ? 'ADM-001' : 'EMP-001'
-                  })...`}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
-                />
+                <div className="relative">
+                  <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    id="login-nik"
+                    name="nikOrEmail"
+                    type="text"
+                    required
+                    value={nikOrEmail}
+                    onChange={(e) => setNikOrEmail(e.target.value)}
+                    placeholder={`Enter Your ${labels.idLabel} (e.g. ${
+                      selectedRole === 'admin' ? 'ADM-001' : 'EMP-001'
+                    })...`}
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-2xs"
+                  />
+                </div>
               </div>
 
+              {/* Password Input */}
               <div className="form-input-group">
                 <label
                   htmlFor="login-password"
                   className="block text-xs font-bold text-slate-700 mb-1"
                 >
-                  Kata Sandi
+                  Password / Kata Sandi
                 </label>
-                <input
-                  id="login-password"
-                  name="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
-                />
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    id="login-password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter Your Password..."
+                    className="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-2xs"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="p-1 text-slate-400 hover:text-slate-600 absolute right-3 top-1/2 -translate-y-1/2 transition-colors cursor-pointer"
+                    title={showPassword ? 'Sembunyikan sandi' : 'Tampilkan sandi'}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
             </div>
 
+            {/* SATSET Options: Remember me & Forgot password */}
+            <div className="flex items-center justify-between text-xs text-slate-600 pt-1">
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  defaultChecked
+                  className="rounded border-slate-300 text-primary focus:ring-primary/20 cursor-pointer"
+                />
+                <span>Remember me</span>
+              </label>
+              <button
+                type="button"
+                className="text-xs text-primary font-bold hover:underline transition-colors cursor-pointer"
+              >
+                Forgot password?
+              </button>
+            </div>
+
+            {/* Solid Primary Login Button */}
             <button
               ref={submitBtnRef}
               type="submit"
               disabled={loading}
               data-testid="btn-login-submit"
-              className="w-full min-h-[44px] py-2.5 px-4 rounded-xl font-bold text-sm text-white bg-primary hover:brightness-105 active:scale-[0.98] transition-all shadow-md shadow-primary/25 flex items-center justify-center gap-2 cursor-pointer mt-2"
+              className="w-full min-h-[44px] py-3.5 px-4 rounded-xl font-bold text-sm text-white bg-primary hover:bg-blue-700 active:scale-[0.99] transition-all shadow-lg shadow-primary/30 flex items-center justify-center gap-2 cursor-pointer mt-3"
             >
               {loading ? 'Memproses...' : 'Masuk ke Sistem'}
             </button>
           </form>
 
-          {/* Quick-Fill Demo Pills */}
+          {/* Quick-Fill Evaluator Demo Pills */}
           <div ref={pillsRef} className="mt-6 pt-5 border-t border-slate-100">
             <DemoCredentials
               onSelectAccount={handleSelectDemo}
               onInstantLogin={handleInstantLogin}
               filterRole="all"
             />
+          </div>
+
+          {/* Footer Clearance Link */}
+          <div className="text-center mt-5 text-[11px] text-slate-400">
+            &copy; 2026 {currentTenant.name}. All rights reserved.
           </div>
         </div>
       </div>
