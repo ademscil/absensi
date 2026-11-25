@@ -4,10 +4,9 @@ import { useTenant } from '../../context/TenantContext.jsx';
 
 /**
  * TenantSwitcher - Multi-tenant white-label preset switcher
- * Horizon UI & TailAdmin unified dropdown design:
- * - Single sleek rounded-full dropdown button with theme color dot
+ * Modeled after TailAdmin & Horizon UI workspace switcher patterns:
+ * - Single sleek rounded-xl dropdown button with theme color dot
  * - Hidden indicator retaining full compatibility for screen readers & tests
- * - Smooth hover and focus states
  * - Cross-tab storage sync
  */
 export function TenantSwitcher({
@@ -16,6 +15,13 @@ export function TenantSwitcher({
   showIndicator = true,
 }) {
   const { currentTenant, setTenant } = useTenant();
+
+  const presetLabels = {
+    corporate: 'Korporat Swasta',
+    pemerintah: 'Instansi Pemerintah',
+    sekolah: 'Institusi Pendidikan',
+    retail: 'Bisnis Retail & F&B',
+  };
 
   // Cross-tab storage sync
   useEffect(() => {
@@ -51,21 +57,26 @@ export function TenantSwitcher({
         </div>
       )}
 
-      {/* Horizon UI Signature Dropdown Pill */}
+      {/* Modern Workspace Selector Button */}
       <div className="relative inline-flex items-center">
         <label htmlFor="tenant-select" className="sr-only">
           Pilih Preset Tenant
         </label>
-        <span
-          className="w-2 h-2 rounded-full absolute left-2.5 pointer-events-none z-10 shadow-2xs ring-2 ring-primary/20"
-          style={{ backgroundColor: currentTenant.colors?.primary || '#2563EB' }}
-        />
+        <div className="flex items-center gap-2 pl-3 pr-8 py-1.5 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-slate-100/90 text-slate-800 transition-all cursor-pointer border border-slate-200/90 shadow-2xs">
+          <span
+            className="w-2.5 h-2.5 rounded-full shrink-0 shadow-2xs ring-2 ring-primary/20"
+            style={{ backgroundColor: currentTenant.colors?.primary || '#2563EB' }}
+          />
+          <span className="truncate max-w-[125px] font-bold">
+            {presetLabels[currentTenant.id] || currentTenant.name}
+          </span>
+        </div>
         <select
           id="tenant-select"
           data-testid="tenant-select"
           value={currentTenant.id}
           onChange={handleSelectChange}
-          className="max-w-[112px] sm:max-w-none truncate pl-6 pr-7 py-1 text-xs font-semibold rounded-full bg-white text-slate-700 hover:text-slate-900 shadow-2xs border border-slate-200/60 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer appearance-none"
+          className="absolute inset-0 opacity-0 w-full h-full cursor-pointer max-w-[112px] truncate"
         >
           <option value="corporate">Korporat Swasta</option>
           <option value="pemerintah">Instansi Pemerintah</option>
@@ -73,7 +84,7 @@ export function TenantSwitcher({
           <option value="retail">Bisnis Retail & F&B</option>
         </select>
         <ChevronDown
-          className="w-3 h-3 text-slate-400 pointer-events-none absolute right-2 z-10"
+          className="w-3.5 h-3.5 text-slate-400 pointer-events-none absolute right-2.5 z-10"
           aria-hidden="true"
         />
       </div>

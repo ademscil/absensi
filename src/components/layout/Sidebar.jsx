@@ -13,7 +13,6 @@ import {
   Shield,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
-import { useTenant } from '../../context/TenantContext.jsx';
 import { Badge } from '../common/Badge.jsx';
 
 /**
@@ -31,7 +30,6 @@ export function Sidebar({
   className = '',
 }) {
   const { role, currentUser } = useAuth();
-  const { labels } = useTenant();
 
   const karyawanItems = [
     { id: 'presensi', label: 'Presensi Kamera', icon: Camera },
@@ -169,21 +167,21 @@ export function Sidebar({
               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between gap-1">
-                <span className="text-xs font-bold text-slate-900 truncate">
-                  {currentUser?.name || 'User'}
-                </span>
+              <div className="text-xs font-bold text-slate-900 truncate">
+                {currentUser?.name || 'User'}
+              </div>
+              <div className="flex items-center gap-1.5 mt-0.5">
                 <Badge
                   variant={role === 'admin' ? 'purple' : 'primary'}
                   className="text-[9px] px-1.5 py-0 shrink-0"
                 >
                   {role === 'admin' ? 'Admin HR' : 'Karyawan'}
                 </Badge>
+                <span className="text-[10px] text-slate-400 font-mono truncate">
+                  {currentUser?.nik || '-'}
+                </span>
               </div>
-              <div className="text-[11px] text-primary font-mono font-semibold truncate mt-0.5">
-                {labels.idLabel}: {currentUser?.nik || '-'}
-              </div>
-              <div className="text-[10px] text-slate-400 truncate">
+              <div className="text-[10px] text-slate-400 truncate mt-0.5">
                 {currentUser?.department || '-'}
               </div>
             </div>
