@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useTenant } from '../../context/TenantContext.jsx';
-import { SpatialCard } from '../common/SpatialCard.jsx';
 import { SpatialBackground } from '../common/SpatialBackground.jsx';
 import { DemoCredentials } from './DemoCredentials.jsx';
 import {

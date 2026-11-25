@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Users, CheckCircle2, Clock, CalendarOff } from 'lucide-react';
 import { useTenant } from '../../context/TenantContext.jsx';
 import { getUsers, getAttendances, getLeaves } from '../../utils/storage.js';
 import { Badge } from '../common/Badge.jsx';
@@ -52,7 +53,12 @@ export function AdminDashboard({
           data-testid="kpi-total-employees"
           className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
         >
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total {labels.userLabel}</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total {labels.userLabel}</span>
+            <div className="w-8 h-8 rounded-lg bg-blue-50 text-primary flex items-center justify-center">
+              <Users className="w-4 h-4" />
+            </div>
+          </div>
           <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
             {kpis.totalUsers}
           </span>
@@ -63,7 +69,12 @@ export function AdminDashboard({
           data-testid="kpi-ontime"
           className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
         >
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Hadir Tepat Waktu</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Hadir Tepat Waktu</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
+          </div>
           <span className="text-2xl sm:text-3xl font-extrabold text-emerald-600 mt-2">
             {kpis.onTime}
           </span>
@@ -74,7 +85,12 @@ export function AdminDashboard({
           data-testid="kpi-late"
           className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
         >
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Terlambat</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Terlambat</span>
+            <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+              <Clock className="w-4 h-4" />
+            </div>
+          </div>
           <span className="text-2xl sm:text-3xl font-extrabold text-rose-600 mt-2">
             {kpis.late}
           </span>
@@ -85,7 +101,12 @@ export function AdminDashboard({
           data-testid="kpi-leave"
           className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
         >
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Cuti / Izin</span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Cuti / Izin</span>
+            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+              <CalendarOff className="w-4 h-4" />
+            </div>
+          </div>
           <span className="text-2xl sm:text-3xl font-extrabold text-amber-600 mt-2">
             {kpis.onLeave}
           </span>

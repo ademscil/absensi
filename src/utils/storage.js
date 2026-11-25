@@ -32,7 +32,7 @@ export function isStorageAvailable() {
     localStorage.setItem(testKey, '1');
     localStorage.removeItem(testKey);
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }

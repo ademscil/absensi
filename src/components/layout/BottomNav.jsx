@@ -1,11 +1,19 @@
 import React from 'react';
+import {
+  Camera,
+  Calendar,
+  FileText,
+  LayoutDashboard,
+  UserCheck,
+  FileSpreadsheet,
+} from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 
 /**
  * BottomNav - Mobile-first floating bottom navigation bar
  * Features:
  * - Active state glow and tactile spring feedback
- * - Smooth tab switching with role-specific tab items
+ * - Smooth tab switching with role-specific tab items with Lucide vector icons
  * - Mobile-first responsive visibility (hidden on md+ screens)
  */
 export function BottomNav({
@@ -17,15 +25,15 @@ export function BottomNav({
   const { role } = useAuth();
 
   const karyawanTabs = [
-    { id: 'presensi', label: 'Presensi', icon: '📷' },
-    { id: 'riwayat', label: 'Riwayat', icon: '📅' },
-    { id: 'pengajuan', label: 'Cuti / Izin', icon: '📝' },
+    { id: 'presensi', label: 'Presensi', icon: Camera },
+    { id: 'riwayat', label: 'Riwayat', icon: Calendar },
+    { id: 'pengajuan', label: 'Cuti / Izin', icon: FileText },
   ];
 
   const adminTabs = [
-    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { id: 'approval', label: 'Approval Hub', icon: '✅' },
-    { id: 'rekap', label: 'Rekapitulasi', icon: '📑' },
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'approval', label: 'Approval Hub', icon: UserCheck },
+    { id: 'rekap', label: 'Rekapitulasi', icon: FileSpreadsheet },
   ];
 
   const tabs = role === 'admin' ? adminTabs : karyawanTabs;
@@ -37,6 +45,7 @@ export function BottomNav({
     >
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
+        const Icon = tab.icon;
         return (
           <button
             key={tab.id}
@@ -49,9 +58,11 @@ export function BottomNav({
                 : 'text-slate-500 hover:text-slate-800 active:scale-95'
             }`}
           >
-            <span className="text-lg leading-none mb-1 transition-transform duration-200">
-              {tab.icon}
-            </span>
+            <Icon
+              className={`w-5 h-5 mb-1 transition-transform duration-200 ${
+                isActive ? 'text-primary' : 'text-slate-500'
+              }`}
+            />
             <span className="text-[11px] truncate">{tab.label}</span>
           </button>
         );

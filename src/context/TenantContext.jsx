@@ -6,7 +6,6 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import {
   TENANT_PRESETS,
-  DEFAULT_TENANT_ID,
   getTenantPreset,
   getAllTenantPresets
 } from '../data/tenantPresets.js';

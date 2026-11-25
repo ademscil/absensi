@@ -14,7 +14,6 @@ import { LeaveRequestForm } from '@/components/leave/LeaveRequestForm.jsx';
 import { LeaveStatusList } from '@/components/leave/LeaveStatusList.jsx';
 import { AdminDashboard } from '@/components/admin/AdminDashboard.jsx';
 import { LeaveApprovalHub } from '@/components/admin/LeaveApprovalHub.jsx';
-import { App } from '@/App.jsx';
 import { TenantProvider } from '@/context/TenantContext.jsx';
 import { AuthProvider } from '@/context/AuthContext.jsx';
 import {
@@ -22,15 +21,12 @@ import {
   getUsers,
   setUsers,
   getUserById,
-  getUserByNik,
   getAttendances,
   setAttendances,
-  addAttendance,
   saveAttendance,
   getLeaves,
   setLeaves,
   addLeave,
-  updateLeave,
   getLeaveRequests,
   saveLeaveRequest,
   updateLeaveRequestStatus,

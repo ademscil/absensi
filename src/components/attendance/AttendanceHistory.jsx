@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Calendar } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getAttendances } from '../../utils/storage.js';
 import { Badge } from '../common/Badge.jsx';
@@ -107,7 +108,7 @@ export function AttendanceHistory({
 
       {filteredRecords.length === 0 ? (
         <div className="text-center py-12 px-4 rounded-2xl bg-slate-50 border border-slate-200">
-          <span className="text-3xl">📅</span>
+          <Calendar className="w-8 h-8 text-slate-300 mx-auto" />
           <p className="text-xs text-slate-500 mt-2 font-medium">Belum ada riwayat kehadiran tercatat.</p>
         </div>
       ) : (

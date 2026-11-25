@@ -435,7 +435,7 @@ describe('Milestone 1: Foundation, Multi-Tenant Theming & Storage Architecture',
       localStorage.setItem(STORAGE_KEYS.LEAVES, 'CORRUPTED_LEAVE_DATA');
 
       expect(() => {
-        const res = updateLeave('lve_001', { status: 'approved' });
+        updateLeave('lve_001', { status: 'approved' });
       }).not.toThrow();
     });
 
