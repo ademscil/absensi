@@ -65,28 +65,28 @@ export function DemoCredentials({
 
   return (
     <div data-testid={testId} className={`demo-credentials space-y-2.5 ${className}`}>
-      <div className="flex items-center justify-between text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-1">
+      <div className="flex items-center justify-between text-[11px] font-semibold text-slate-500 uppercase tracking-wider px-1">
         <span>Akun Demo Cepat</span>
-        <span className="text-[10px] text-sky-400 font-normal">Klik untuk isi instan</span>
+        <span className="text-[10px] text-blue-600 font-medium">Klik untuk isi instan</span>
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2">
         {accountsToDisplay.map((acc) => (
           <div
             key={acc.nik}
-            className="group relative inline-flex items-center rounded-full bg-slate-800/90 border border-slate-700/80 hover:border-sky-500/60 transition-all shadow-sm overflow-hidden"
+            className="group relative inline-flex items-center rounded-full bg-slate-50 border border-slate-200 hover:border-blue-400 hover:bg-blue-50/30 transition-all shadow-sm overflow-hidden"
           >
             <button
               type="button"
               data-testid={`demo-pill-${acc.role}`}
               data-account-nik={acc.nik}
               onClick={(e) => handlePillClick(acc, e)}
-              className="px-3 py-1.5 text-xs font-semibold text-slate-200 hover:text-white flex items-center gap-1.5 transition-colors focus:outline-none"
+              className="px-3 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1.5 transition-colors focus:outline-none"
               title={`Isi kredensial ${acc.name} (${acc.nik})`}
             >
               <span
                 className={`w-2 h-2 rounded-full ${
-                  acc.role === 'admin' ? 'bg-purple-400' : 'bg-sky-400'
+                  acc.role === 'admin' ? 'bg-purple-500' : 'bg-blue-500'
                 }`}
               />
               <span>
@@ -99,7 +99,7 @@ export function DemoCredentials({
                 type="button"
                 data-testid={`demo-instant-${acc.nik.toLowerCase()}`}
                 onClick={(e) => handleInstantLogin(acc, e)}
-                className="px-2 py-1.5 bg-slate-700/60 hover:bg-sky-600 text-[10px] font-bold text-slate-300 hover:text-white border-l border-slate-700/80 transition-colors"
+                className="px-2 py-1.5 bg-slate-100 hover:bg-blue-600 text-[10px] font-bold text-slate-500 hover:text-white border-l border-slate-200 transition-colors"
                 title="Langsung Masuk"
               >
                 ⚡

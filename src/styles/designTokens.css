@@ -8,7 +8,7 @@
   --color-primary: #1E40AF;
   --color-primary-rgb: 30, 64, 175;
   --color-primary-hover: #1D4ED8;
-  --color-primary-light: rgba(30, 64, 175, 0.15);
+  --color-primary-light: rgba(30, 64, 175, 0.08);
   
   --color-secondary: #0D9488;
   --color-secondary-rgb: 13, 148, 136;
@@ -16,63 +16,63 @@
   --color-accent: #3B82F6;
   --color-accent-rgb: 59, 130, 246;
   
-  --color-bg-gradient: linear-gradient(135deg, #0A0F1D 0%, #0F172A 50%, #070B14 100%);
-  --color-card-bg: rgba(30, 41, 59, 0.7);
-  --color-card-border: rgba(59, 130, 246, 0.25);
+  --color-bg-gradient: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+  --color-card-bg: #FFFFFF;
+  --color-card-border: #E2E8F0;
 
   /* Semantic Status Colors */
   --color-status-on-time: #10B981;
-  --color-status-on-time-bg: rgba(16, 185, 129, 0.15);
-  --color-status-on-time-border: rgba(16, 185, 129, 0.35);
+  --color-status-on-time-bg: rgba(16, 185, 129, 0.1);
+  --color-status-on-time-border: rgba(16, 185, 129, 0.25);
 
   --color-status-late: #F59E0B;
-  --color-status-late-bg: rgba(245, 158, 11, 0.15);
-  --color-status-late-border: rgba(245, 158, 11, 0.35);
+  --color-status-late-bg: rgba(245, 158, 11, 0.1);
+  --color-status-late-border: rgba(245, 158, 11, 0.25);
 
   --color-status-leave: #3B82F6;
-  --color-status-leave-bg: rgba(59, 130, 246, 0.15);
-  --color-status-leave-border: rgba(59, 130, 246, 0.35);
+  --color-status-leave-bg: rgba(59, 130, 246, 0.1);
+  --color-status-leave-border: rgba(59, 130, 246, 0.25);
 
   --color-status-permit: #8B5CF6;
-  --color-status-permit-bg: rgba(139, 92, 246, 0.15);
-  --color-status-permit-border: rgba(139, 92, 246, 0.35);
+  --color-status-permit-bg: rgba(139, 92, 246, 0.1);
+  --color-status-permit-border: rgba(139, 92, 246, 0.25);
 
   --color-status-sick: #EF4444;
-  --color-status-sick-bg: rgba(239, 68, 68, 0.15);
-  --color-status-sick-border: rgba(239, 68, 68, 0.35);
+  --color-status-sick-bg: rgba(239, 68, 68, 0.1);
+  --color-status-sick-border: rgba(239, 68, 68, 0.25);
 
-  /* Neutral Dark Palettes */
-  --color-bg-base: #070A12;
-  --color-surface-0: #0C1220;
-  --color-surface-1: #111A2E;
-  --color-surface-2: #1E293B;
+  /* Modern Clean Light Palettes (Dribbble/Figma Standard) */
+  --color-bg-base: #F8FAFC;
+  --color-surface-0: #FFFFFF;
+  --color-surface-1: #F8FAFC;
+  --color-surface-2: #F1F5F9;
   
-  --color-text-main: #F8FAFC;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #94A3B8;
-  --color-text-subtle: #64748B;
+  --color-text-main: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748B;
+  --color-text-subtle: #94A3B8;
   
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-medium: rgba(255, 255, 255, 0.15);
-  --color-border-highlight: rgba(255, 255, 255, 0.25);
+  --color-border-subtle: #F1F5F9;
+  --color-border-medium: #E2E8F0;
+  --color-border-highlight: #CBD5E1;
 
   /* Glassmorphism Surface Properties */
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-hover: rgba(255, 255, 255, 0.08);
-  --glass-bg-active: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-focus: rgba(255, 255, 255, 0.25);
-  --glass-blur: 16px;
-  --glass-blur-heavy: 24px;
-  --glass-highlight: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-bg-active: #FFFFFF;
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-border-focus: rgba(59, 130, 246, 0.4);
+  --glass-blur: 12px;
+  --glass-blur-heavy: 20px;
+  --glass-highlight: rgba(255, 255, 255, 0.9);
 
   /* Spatial Depth & Perspective (ThreeUI Polish) */
   --perspective-card: 1000px;
-  --shadow-spatial-depth: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(var(--color-primary-rgb), 0.2);
-  --shadow-glow: 0 0 24px rgba(var(--color-primary-rgb), 0.4);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.6);
+  --shadow-spatial-depth: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-glow: 0 4px 14px 0 rgba(30, 64, 175, 0.18);
+  --shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
 
   /* Typography Scale */
   --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;

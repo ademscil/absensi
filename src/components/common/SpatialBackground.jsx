@@ -77,7 +77,7 @@ export function SpatialBackground({
       }
 
       // Draw subtle connecting geometric lines
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.05)';
       ctx.lineWidth = 1;
 
       for (let i = 0; i < particles.length; i++) {
@@ -111,7 +111,7 @@ export function SpatialBackground({
         const renderX = p.x + pointer.currentX * p.depth;
         const renderY = p.y + pointer.currentY * p.depth;
 
-        ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+        ctx.fillStyle = `rgba(99, 102, 241, ${p.alpha * 0.4})`;
         ctx.beginPath();
         ctx.arc(renderX, renderY, p.radius, 0, Math.PI * 2);
         ctx.fill();

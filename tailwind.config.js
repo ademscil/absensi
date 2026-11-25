@@ -17,7 +17,7 @@ export default {
       },
       backgroundImage: {
         'radial-vignette':
-          'radial-gradient(circle at 50% 35%, rgba(var(--color-primary-rgb), 0.14) 0%, rgba(15, 23, 42, 0.4) 55%, rgba(2, 6, 23, 0.92) 100%)',
+          'radial-gradient(circle at 50% 15%, rgba(var(--color-primary-rgb), 0.08) 0%, rgba(248, 250, 252, 0.5) 60%, rgba(241, 245, 249, 0.95) 100%)',
       },
       keyframes: {
         'fade-in': {
