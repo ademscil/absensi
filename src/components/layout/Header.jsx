@@ -3,15 +3,14 @@ import { Clock, LogOut } from 'lucide-react';
 import { useTenant } from '../../context/TenantContext.jsx';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { TenantSwitcher } from '../common/TenantSwitcher.jsx';
-import { Badge } from '../common/Badge.jsx';
 
 /**
- * Header - Top navigation bar redesigned with modern enterprise SaaS styling
+ * Header - Top navigation bar redesigned following Horizon UI & TailAdmin design standards
  * Features:
- * - Clean brand logo & title with Enterprise pill tag
- * - Live Indonesian clock (HH:mm:ss WIB) with clean unmount timer cleanup
- * - Segmented unified Tenant Switcher control
- * - Sleek user profile initials avatar and refined subtle logout action
+ * - Clean contextual breadcrumb header
+ * - Unified signature floating capsule control bar on the right
+ * - Integrated live Indonesian clock, tenant preset switcher, user avatar, and quick logout
+ * - Zero border soup and cohesive elevation
  */
 export function Header({
   'data-testid': testId = 'app-header',
@@ -39,7 +38,6 @@ export function Header({
     };
   }, []);
 
-  // Generate initials for header avatar
   const initials = currentUser?.name
     ? currentUser.name
         .split(' ')
@@ -52,75 +50,75 @@ export function Header({
   return (
     <header
       data-testid={testId}
-      className={`app-header sticky top-0 z-40 w-full px-4 sm:px-6 py-2.5 sm:py-3 border-b border-slate-200/90 bg-white/95 backdrop-blur-md flex items-center justify-between gap-3 shadow-2xs ${className}`}
+      className={`app-header sticky top-0 z-40 w-full h-16 px-4 sm:px-6 bg-white/80 backdrop-blur-xl border-b border-slate-200/70 flex items-center justify-between gap-4 transition-all ${className}`}
     >
-      {/* Brand & Tenant Identity */}
-      <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
+      {/* Left: Brand Identity & Context Breadcrumb */}
+      <div className="flex items-center gap-3 min-w-0">
         <div
           data-testid="brand-logo"
-          className="w-9 h-9 max-w-full max-h-full object-contain overflow-hidden rounded-xl flex items-center justify-center shrink-0 shadow-2xs border border-slate-200/90 bg-white p-1 [&>svg]:w-full [&>svg]:h-full [&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:object-contain"
+          className="w-9 h-9 max-w-full max-h-full object-contain overflow-hidden rounded-xl flex items-center justify-center shrink-0 shadow-2xs border border-slate-200/80 bg-white p-1 [&>svg]:w-full [&>svg]:h-full [&>svg]:max-w-full [&>svg]:max-h-full [&>svg]:object-contain"
           dangerouslySetInnerHTML={{ __html: currentTenant.logoSvg }}
         />
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <h1 className="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight truncate max-w-[96px] sm:max-w-xs">
+            <h1 className="text-sm font-bold text-slate-900 tracking-tight truncate max-w-xs sm:max-w-sm">
               {currentTenant.name}
             </h1>
-            <span className="hidden md:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-primary/10 text-primary border border-primary/20 shrink-0">
-              Enterprise
+            <span className="hidden sm:inline-flex text-slate-300">/</span>
+            <span className="hidden sm:inline-flex items-center text-xs font-medium text-slate-500">
+              {role === 'admin' ? 'HR Portal' : 'Presensi'}
             </span>
           </div>
-          <p className="text-[11px] text-slate-400 font-medium truncate hidden sm:block">
+          <p className="text-[11px] text-slate-400 font-normal truncate hidden md:block">
             {currentTenant.tagline}
           </p>
         </div>
       </div>
 
-      {/* Right Controls: Clock, TenantSwitcher, User Avatar & Logout */}
-      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-        {/* Live Indonesian Clock */}
+      {/* Right: Horizon UI Signature Floating Capsule Control Bar */}
+      <div className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-slate-50 border border-slate-200/80 shadow-2xs">
+        {/* Indonesian Live Clock */}
         <div
           data-testid="digital-clock"
-          className="px-3 py-1.5 text-xs font-mono font-semibold rounded-xl bg-slate-50 text-slate-700 border border-slate-200 hidden md:flex items-center gap-1.5 shadow-2xs"
+          className="hidden md:flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-medium text-slate-600 border-r border-slate-200/80"
         >
           <Clock className="w-3.5 h-3.5 text-primary shrink-0" aria-hidden="true" />
           <span>{wibTime}</span>
         </div>
 
-        {/* Unified Tenant Switcher */}
+        {/* Tenant Preset Switcher */}
         <TenantSwitcher />
 
-        {/* Authenticated User Profile & Action */}
+        {/* User Session Profile & Actions */}
         {currentUser && (
-          <div className="flex items-center gap-2.5 sm:gap-3 pl-2 sm:pl-3 border-l border-slate-200">
-            {/* User Profile Info with Initials Avatar */}
-            <div className="hidden sm:flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary to-indigo-600 text-white font-extrabold text-xs flex items-center justify-center shrink-0 shadow-2xs">
+          <div className="flex items-center gap-2 pl-1 border-l border-slate-200/80">
+            {/* Avatar & User Details */}
+            <div className="flex items-center gap-2 pl-1">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-primary to-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 ring-2 ring-white shadow-2xs">
                 {initials}
               </div>
-              <div className="text-left">
-                <div className="text-xs font-bold text-slate-900 truncate max-w-[120px] leading-tight">
+              <div className="text-left hidden lg:block pr-1">
+                <div className="text-xs font-bold text-slate-800 truncate max-w-[110px] leading-tight">
                   {currentUser.name}
                 </div>
-                <Badge
+                <span
                   data-testid="role-badge"
-                  variant={role === 'admin' ? 'purple' : 'primary'}
-                  className="text-[9px] px-1.5 py-0 mt-0.5"
+                  className="text-[10px] font-medium text-slate-400"
                 >
                   {role === 'admin' ? 'Admin HR' : 'Karyawan'}
-                </Badge>
+                </span>
               </div>
             </div>
 
-            {/* Subtle Modern Logout Button */}
+            {/* Subtle Logout Action */}
             <button
               type="button"
               onClick={logout}
               data-testid="btn-logout"
-              className="px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-xl text-slate-600 hover:text-rose-700 bg-slate-50 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 transition-all duration-150 cursor-pointer flex items-center gap-1.5 shadow-2xs group"
+              title="Keluar dari Sistem"
+              className="w-7 h-7 rounded-full flex items-center justify-center text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
             >
-              <LogOut className="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-600 transition-colors" aria-hidden="true" />
-              <span className="hidden sm:inline">Keluar</span>
+              <LogOut className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
           </div>
         )}

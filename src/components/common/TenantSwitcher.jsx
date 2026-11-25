@@ -4,12 +4,11 @@ import { useTenant } from '../../context/TenantContext.jsx';
 
 /**
  * TenantSwitcher - Multi-tenant white-label preset switcher
- * Features:
- * - Dropdown selection with accessible <select data-testid="tenant-select">
- * - Visual active preset indicator badge with theme color dot
- * - Unified modern segmented control appearance
- * - Instant CSS variable theme transition across 4 presets
- * - Cross-tab LocalStorage synchronization
+ * Horizon UI & TailAdmin unified dropdown design:
+ * - Single sleek rounded-full dropdown button with theme color dot
+ * - Hidden indicator retaining full compatibility for screen readers & tests
+ * - Smooth hover and focus states
+ * - Cross-tab storage sync
  */
 export function TenantSwitcher({
   'data-testid': testId = 'tenant-switcher',
@@ -36,34 +35,37 @@ export function TenantSwitcher({
   return (
     <div
       data-testid={testId}
-      className={`tenant-switcher inline-flex items-center gap-1.5 p-1 rounded-xl bg-slate-100/80 border border-slate-200/90 shadow-2xs ${className}`}
+      className={`tenant-switcher inline-flex items-center ${className}`}
     >
-      {/* Visual Indicator of Active Preset */}
+      {/* Active Theme Color & Organization Indicator (accessible for tests and screen readers) */}
       {showIndicator && (
         <div
           data-testid="active-preset-indicator"
-          className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-200/60 text-[11px] font-semibold text-slate-700 transition-colors duration-200 shadow-2xs"
+          className="sr-only"
         >
           <span
             data-testid="active-preset-dot"
-            className="w-2.5 h-2.5 rounded-full transition-colors duration-300 ring-2 ring-primary/20 shadow-2xs"
             style={{ backgroundColor: currentTenant.colors?.primary || '#2563EB' }}
           />
-          <span className="font-semibold text-slate-800">{currentTenant.name}</span>
+          <span>{currentTenant.name}</span>
         </div>
       )}
 
-      {/* Accessible native select */}
+      {/* Horizon UI Signature Dropdown Pill */}
       <div className="relative inline-flex items-center">
         <label htmlFor="tenant-select" className="sr-only">
           Pilih Preset Tenant
         </label>
+        <span
+          className="w-2 h-2 rounded-full absolute left-2.5 pointer-events-none z-10 shadow-2xs ring-2 ring-primary/20"
+          style={{ backgroundColor: currentTenant.colors?.primary || '#2563EB' }}
+        />
         <select
           id="tenant-select"
           data-testid="tenant-select"
           value={currentTenant.id}
           onChange={handleSelectChange}
-          className="max-w-[112px] sm:max-w-none truncate pl-2.5 pr-7 py-1 text-xs font-semibold rounded-lg bg-white border border-slate-200/60 text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer shadow-2xs appearance-none"
+          className="max-w-[112px] sm:max-w-none truncate pl-6 pr-7 py-1 text-xs font-semibold rounded-full bg-white text-slate-700 hover:text-slate-900 shadow-2xs border border-slate-200/60 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer appearance-none"
         >
           <option value="corporate">Korporat Swasta</option>
           <option value="pemerintah">Instansi Pemerintah</option>
@@ -71,7 +73,7 @@ export function TenantSwitcher({
           <option value="retail">Bisnis Retail & F&B</option>
         </select>
         <ChevronDown
-          className="w-3.5 h-3.5 text-slate-400 pointer-events-none absolute right-2"
+          className="w-3 h-3 text-slate-400 pointer-events-none absolute right-2 z-10"
           aria-hidden="true"
         />
       </div>
