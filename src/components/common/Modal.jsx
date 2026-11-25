@@ -43,7 +43,7 @@ export function Modal({
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-dialog-title' : undefined}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md transition-all duration-300 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-all duration-300 animate-fade-in"
     >
       {/* Click outside backdrop */}
       <div
@@ -55,13 +55,13 @@ export function Modal({
       {/* Modal Dialog Card */}
       <div
         ref={modalRef}
-        className={`relative z-10 w-full max-w-lg glass-panel p-6 rounded-2xl shadow-spatial-depth border border-slate-700/60 bg-slate-900/95 text-slate-100 transform transition-all duration-200 scale-100 ${className}`}
+        className={`relative z-10 w-full max-w-lg p-6 sm:p-7 rounded-3xl shadow-2xl border border-slate-200/90 bg-white text-slate-800 transform transition-all duration-200 scale-100 ${className}`}
       >
-        <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-700/50">
+        <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
           {title && (
             <h3
               id="modal-dialog-title"
-              className="text-lg font-bold text-white tracking-wide"
+              className="text-lg font-extrabold text-slate-900 tracking-tight"
             >
               {title}
             </h3>
@@ -70,7 +70,7 @@ export function Modal({
             type="button"
             onClick={onClose}
             aria-label="Tutup Modal"
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
           >
             ✕
           </button>

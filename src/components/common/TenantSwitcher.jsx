@@ -40,14 +40,14 @@ export function TenantSwitcher({
       {showIndicator && (
         <div
           data-testid="active-preset-indicator"
-          className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 text-[11px] font-medium text-slate-300 transition-colors duration-200"
+          className="hidden lg:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-50 border border-slate-200 text-[11px] font-semibold text-slate-700 transition-colors duration-200 shadow-xs"
         >
           <span
             data-testid="active-preset-dot"
-            className="w-2.5 h-2.5 rounded-full transition-colors duration-300 shadow-sm"
+            className="w-2.5 h-2.5 rounded-full transition-colors duration-300 shadow-xs"
             style={{ backgroundColor: currentTenant.colors?.primary || '#2563EB' }}
           />
-          <span className="font-semibold text-slate-100">{currentTenant.name}</span>
+          <span className="font-semibold text-slate-800">{currentTenant.name}</span>
         </div>
       )}
 
@@ -61,7 +61,7 @@ export function TenantSwitcher({
           data-testid="tenant-select"
           value={currentTenant.id}
           onChange={handleSelectChange}
-          className="max-w-[112px] sm:max-w-none truncate px-2 sm:px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800/90 border border-slate-700 text-slate-100 hover:border-slate-500 focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer shadow-sm"
+          className="max-w-[112px] sm:max-w-none truncate px-2.5 sm:px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-50 border border-slate-200 text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer shadow-xs"
         >
           <option value="corporate">Korporat Swasta</option>
           <option value="pemerintah">Instansi Pemerintah</option>

@@ -147,22 +147,30 @@ export function LeaveRequestForm({
     <form
       data-testid={testId}
       onSubmit={handleSubmit}
-      className={`leave-request-form space-y-4 p-5 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 ${className}`}
+      className={`leave-request-form space-y-5 p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-sm text-slate-800 ${className}`}
     >
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 className="text-sm font-bold text-white tracking-wide">
-          Pengajuan Perizinan & Cuti
-        </h3>
-        <span data-testid="leave-quota-badge" className="text-xs font-semibold text-sky-400">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+        <div>
+          <h3 className="text-base font-extrabold text-slate-900 tracking-tight">
+            Pengajuan Perizinan & Cuti
+          </h3>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Ajukan permohonan cuti tahunan, izin urusan pribadi, atau surat sakit
+          </p>
+        </div>
+        <div
+          data-testid="leave-quota-badge"
+          className="self-start sm:self-auto px-3 py-1 rounded-xl bg-blue-50 border border-blue-100 text-primary text-xs font-bold shadow-xs"
+        >
           Sisa Cuti: {remainingQuota} Hari
-        </span>
+        </div>
       </div>
 
       {errorMessage && (
         <div
           role="alert"
           data-testid="leave-form-error"
-          className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-medium"
+          className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium animate-fade-in"
         >
           {errorMessage}
         </div>
@@ -172,7 +180,7 @@ export function LeaveRequestForm({
         <div
           role="status"
           data-testid="leave-form-success"
-          className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-medium"
+          className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium animate-fade-in"
         >
           {successMessage}
         </div>
@@ -180,7 +188,7 @@ export function LeaveRequestForm({
 
       {/* Leave Type */}
       <div>
-        <label htmlFor="leave-type-select" className="block text-xs font-semibold text-slate-300 mb-1">
+        <label htmlFor="leave-type-select" className="block text-xs font-bold text-slate-700 mb-1.5">
           Tipe Pengajuan
         </label>
         <select
@@ -188,7 +196,7 @@ export function LeaveRequestForm({
           data-testid="leave-type-select"
           value={leaveType}
           onChange={(e) => setLeaveType(e.target.value)}
-          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs"
         >
           <option value="cuti">Cuti Tahunan</option>
           <option value="izin">Izin Urusan Pribadi</option>
@@ -197,9 +205,9 @@ export function LeaveRequestForm({
       </div>
 
       {/* Date Pickers */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
         <div>
-          <label htmlFor="leave-start-date" className="block text-xs font-semibold text-slate-300 mb-1">
+          <label htmlFor="leave-start-date" className="block text-xs font-bold text-slate-700 mb-1.5">
             Tanggal Mulai
           </label>
           <input
@@ -208,12 +216,12 @@ export function LeaveRequestForm({
             data-testid="leave-start-date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs"
             required
           />
         </div>
         <div>
-          <label htmlFor="leave-end-date" className="block text-xs font-semibold text-slate-300 mb-1">
+          <label htmlFor="leave-end-date" className="block text-xs font-bold text-slate-700 mb-1.5">
             Tanggal Selesai
           </label>
           <input
@@ -222,40 +230,40 @@ export function LeaveRequestForm({
             data-testid="leave-end-date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs"
             required
           />
         </div>
       </div>
 
       {/* Duration Display */}
-      <div className="flex items-center justify-between text-xs px-3 py-2 rounded-xl bg-slate-800/60">
-        <span className="text-slate-400">Total Durasi Kerja:</span>
-        <span data-testid="calculated-duration" className="font-bold text-white">
+      <div className="flex items-center justify-between text-xs px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
+        <span className="text-slate-500 font-medium">Total Durasi Hari Kerja:</span>
+        <span data-testid="calculated-duration" className="font-extrabold text-slate-900 text-sm">
           {calculatedDuration} Hari
         </span>
       </div>
 
       {/* Warning on exceeding quota or invalid range */}
       {invalidRange && (
-        <p className="text-xs text-rose-400">
+        <p className="text-xs text-rose-600 font-medium">
           Tanggal selesai tidak boleh lebih awal dari tanggal mulai
         </p>
       )}
       {weekendOnly && (
-        <p className="text-xs text-amber-400">
+        <p className="text-xs text-amber-600 font-medium">
           Rentang tanggal hanya memuat hari libur akhir pekan
         </p>
       )}
       {isExceedingQuota && (
-        <p className="text-xs text-rose-400">
+        <p className="text-xs text-rose-600 font-medium">
           Sisa cuti tidak mencukupi (Tersisa: {remainingQuota} hari, Diajukan: {calculatedDuration} hari)
         </p>
       )}
 
       {/* Simulated Document Attachment */}
       <div>
-        <label htmlFor="leave-attachment" className="block text-xs font-semibold text-slate-300 mb-1">
+        <label htmlFor="leave-attachment" className="block text-xs font-bold text-slate-700 mb-1.5">
           Lampiran Dokumen / Surat Keterangan (Opsional)
         </label>
         <input
@@ -266,19 +274,19 @@ export function LeaveRequestForm({
             const file = e.target.files?.[0];
             setAttachmentName(file ? file.name : '');
           }}
-          className="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-sky-400 hover:file:bg-slate-700 cursor-pointer"
+          className="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border file:border-slate-200 file:text-xs file:font-bold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 cursor-pointer"
         />
         {attachmentName && (
           <div
             data-testid="leave-attachment-preview"
-            className="mt-1.5 inline-flex max-w-full min-w-0 items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-950/60 border border-sky-800/60 text-sky-300 text-xs font-mono"
+            className="mt-2 inline-flex max-w-full min-w-0 items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-mono shadow-xs"
           >
             <span className="shrink-0">📎</span>
             <span className="min-w-0 flex-1 truncate max-w-[160px] sm:max-w-[200px]">{attachmentName}</span>
             <button
               type="button"
               onClick={() => setAttachmentName('')}
-              className="text-slate-400 hover:text-rose-400 ml-1 text-xs cursor-pointer shrink-0"
+              className="text-slate-400 hover:text-rose-600 ml-1 text-xs cursor-pointer shrink-0 font-bold"
               title="Hapus lampiran"
             >
               ✕
@@ -289,7 +297,7 @@ export function LeaveRequestForm({
 
       {/* Reason */}
       <div>
-        <label htmlFor="leave-reason" className="block text-xs font-semibold text-slate-300 mb-1">
+        <label htmlFor="leave-reason" className="block text-xs font-bold text-slate-700 mb-1.5">
           Alasan {labels.userLabel}
         </label>
         <textarea
@@ -299,7 +307,7 @@ export function LeaveRequestForm({
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           placeholder="Tuliskan keterangan lengkap pengajuan (minimal 5 karakter)..."
-          className="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs placeholder:text-slate-500 focus:ring-2 focus:ring-sky-500"
+          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-xs"
           required
         />
       </div>
@@ -308,10 +316,10 @@ export function LeaveRequestForm({
         type="submit"
         disabled={isSubmitDisabled}
         data-testid="btn-submit-leave"
-        className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs text-white transition-all shadow-glow ${
+        className={`w-full min-h-[44px] py-2.5 px-4 rounded-xl font-bold text-sm text-white transition-all shadow-md ${
           isSubmitDisabled
-            ? 'bg-slate-700 opacity-50 cursor-not-allowed'
-            : 'bg-primary hover:brightness-110 active:scale-[0.98]'
+            ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
+            : 'bg-primary hover:brightness-105 active:scale-[0.98] shadow-primary/20 cursor-pointer'
         }`}
       >
         Kirim Pengajuan

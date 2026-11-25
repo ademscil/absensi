@@ -193,14 +193,14 @@ export function AttendanceRekap({
   const displayedRecords = filteredRecords.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   return (
-    <div data-testid={testId} className={`attendance-rekap space-y-5 ${className}`}>
+    <div data-testid={testId} className={`attendance-rekap space-y-6 ${className}`}>
       {/* Header & Export Action */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
         <div>
-          <h3 className="text-base sm:text-lg font-bold text-white tracking-wide">
+          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
             Rekapitulasi Presensi & Kehadiran
           </h3>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Agregasi presensi & perizinan lintas unit kerja {currentTenant.name}
           </p>
         </div>
@@ -209,7 +209,7 @@ export function AttendanceRekap({
           type="button"
           data-testid="btn-export-excel"
           onClick={handleExportExcel}
-          className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-sm flex items-center gap-2 transition-all cursor-pointer shrink-0"
+          className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-600/20 flex items-center gap-2 transition-all cursor-pointer shrink-0"
         >
           <span data-testid="export-excel-btn" className="inline-flex items-center gap-2">
             <FileSpreadsheet className="w-4 h-4" aria-hidden="true" />
@@ -222,82 +222,82 @@ export function AttendanceRekap({
       <div data-testid="recap-kpi-cards" className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div
           data-testid="rekap-kpi-hadir"
-          className="p-3.5 sm:p-4 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-3"
+          className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-between gap-3 hover:shadow-md transition-all"
         >
           <div>
-            <span className="text-[11px] font-semibold text-slate-400 block">Total Hadir</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-emerald-400 mt-1 block">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Total Hadir</span>
+            <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 mt-1 block">
               {summaryMetrics.totalHadir}
             </span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
-            <CheckCircle2 className="w-4 h-4" aria-hidden="true" />
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
           </div>
         </div>
 
         <div
           data-testid="rekap-kpi-terlambat"
-          className="p-3.5 sm:p-4 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-3"
+          className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-between gap-3 hover:shadow-md transition-all"
         >
           <div>
-            <span className="text-[11px] font-semibold text-slate-400 block">Total Terlambat</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-rose-400 mt-1 block">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Total Terlambat</span>
+            <span className="text-xl sm:text-2xl font-extrabold text-rose-600 mt-1 block">
               {summaryMetrics.totalTerlambat}
             </span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
-            <Clock className="w-4 h-4" aria-hidden="true" />
+          <div className="w-10 h-10 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center shrink-0">
+            <Clock className="w-5 h-5" aria-hidden="true" />
           </div>
         </div>
 
         <div
           data-testid="rekap-kpi-cuti"
-          className="p-3.5 sm:p-4 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-3"
+          className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-between gap-3 hover:shadow-md transition-all"
         >
           <div>
-            <span className="text-[11px] font-semibold text-slate-400 block">Total Cuti</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-sky-400 mt-1 block">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Total Cuti</span>
+            <span className="text-xl sm:text-2xl font-extrabold text-primary mt-1 block">
               {summaryMetrics.totalCuti}
             </span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/30 text-sky-400 flex items-center justify-center shrink-0">
-            <CalendarOff className="w-4 h-4" aria-hidden="true" />
+          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-primary flex items-center justify-center shrink-0">
+            <CalendarOff className="w-5 h-5" aria-hidden="true" />
           </div>
         </div>
 
         <div
           data-testid="rekap-kpi-izin-sakit"
-          className="p-3.5 sm:p-4 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-3"
+          className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex items-center justify-between gap-3 hover:shadow-md transition-all"
         >
           <div>
-            <span className="text-[11px] font-semibold text-slate-400 block">Total Izin/Sakit</span>
-            <span className="text-xl sm:text-2xl font-extrabold text-amber-400 mt-1 block">
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">Total Izin/Sakit</span>
+            <span className="text-xl sm:text-2xl font-extrabold text-amber-600 mt-1 block">
               {summaryMetrics.totalIzinSakit}
             </span>
           </div>
-          <div className="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
-            <Stethoscope className="w-4 h-4" aria-hidden="true" />
+          <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
+            <Stethoscope className="w-5 h-5" aria-hidden="true" />
           </div>
         </div>
       </div>
 
       {/* Filter Bar */}
-      <div className="p-4 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 space-y-3">
+      <div className="p-5 rounded-3xl bg-white border border-slate-200/80 shadow-sm space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-            <Filter className="w-3.5 h-3.5 text-sky-400" aria-hidden="true" />
+          <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+            <Filter className="w-4 h-4 text-primary" aria-hidden="true" />
             <span>Filter Multi-Kriteria</span>
           </div>
           <div className="flex items-center gap-3">
-            <span aria-live="polite" className="text-[11px] text-slate-400">
-              Menampilkan <strong className="text-slate-200">{filteredRecords.length}</strong> dari {allRecords.length} data
+            <span aria-live="polite" className="text-[11px] text-slate-500">
+              Menampilkan <strong className="text-slate-800">{filteredRecords.length}</strong> dari {allRecords.length} data
             </span>
             {hasActiveFilters && (
               <button
                 type="button"
                 data-testid="btn-clear-filters"
                 onClick={handleResetFilters}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-800 text-sky-400 border border-slate-700 hover:bg-slate-700 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 transition-colors cursor-pointer shadow-xs"
               >
                 <RotateCcw className="w-3 h-3" aria-hidden="true" />
                 <span>Atur Ulang</span>
@@ -306,15 +306,15 @@ export function AttendanceRekap({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
           {/* Search by NIK or Employee Name */}
           <div>
-            <label htmlFor="filter-search" className="block text-[11px] font-semibold text-slate-400 mb-1">
+            <label htmlFor="filter-search" className="block text-[11px] font-bold text-slate-600 mb-1">
               Cari {labels.idLabel} / Nama
             </label>
             <div className="relative">
               <Search
-                className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
                 aria-hidden="true"
               />
               <input
@@ -327,14 +327,14 @@ export function AttendanceRekap({
                   setCurrentPage(1);
                 }}
                 placeholder={`Cari ${labels.idLabel} atau Nama...`}
-                className="w-full pl-8 pr-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs placeholder:text-slate-500 focus:ring-2 focus:ring-sky-500"
+                className="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
               />
             </div>
           </div>
 
           {/* Department Filter */}
           <div>
-            <label htmlFor="filter-dept" className="block text-[11px] font-semibold text-slate-400 mb-1">
+            <label htmlFor="filter-dept" className="block text-[11px] font-bold text-slate-600 mb-1">
               {labels.deptLabel}
             </label>
             <select
@@ -345,7 +345,7 @@ export function AttendanceRekap({
                 setDepartmentFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
             >
               <option value="ALL">Semua {labels.deptLabel}</option>
               {departmentOptions.map((dept) => (
@@ -358,7 +358,7 @@ export function AttendanceRekap({
 
           {/* Status Filter */}
           <div>
-            <label htmlFor="filter-status" className="block text-[11px] font-semibold text-slate-400 mb-1">
+            <label htmlFor="filter-status" className="block text-[11px] font-bold text-slate-600 mb-1">
               Status Kehadiran
             </label>
             <select
@@ -369,7 +369,7 @@ export function AttendanceRekap({
                 setStatusFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
             >
               <option value="ALL">Semua Status</option>
               <option value="Tepat Waktu">Tepat Waktu</option>
@@ -383,7 +383,7 @@ export function AttendanceRekap({
 
           {/* Start Date */}
           <div>
-            <label htmlFor="filter-start-date" className="block text-[11px] font-semibold text-slate-400 mb-1">
+            <label htmlFor="filter-start-date" className="block text-[11px] font-bold text-slate-600 mb-1">
               Mulai Tanggal
             </label>
             <input
@@ -395,13 +395,13 @@ export function AttendanceRekap({
                 setStartDateFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
             />
           </div>
 
           {/* End Date */}
           <div>
-            <label htmlFor="filter-end-date" className="block text-[11px] font-semibold text-slate-400 mb-1">
+            <label htmlFor="filter-end-date" className="block text-[11px] font-bold text-slate-600 mb-1">
               Sampai Tanggal
             </label>
             <input
@@ -413,43 +413,43 @@ export function AttendanceRekap({
                 setEndDateFilter(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full px-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-100 text-xs focus:ring-2 focus:ring-sky-500"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
             />
           </div>
         </div>
       </div>
 
       {/* Recapitulation Table */}
-      <div className="rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 overflow-hidden">
+      <div className="rounded-3xl bg-white border border-slate-200/80 shadow-sm overflow-hidden">
         <div
           tabIndex={0}
           role="region"
           aria-labelledby="recap-table-caption"
-          className="overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+          className="overflow-x-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
-          <table data-testid="recap-table" className="w-full text-left text-xs text-slate-200 min-w-[720px]">
+          <table data-testid="recap-table" className="w-full text-left text-xs text-slate-700 min-w-[720px]">
             <caption id="recap-table-caption" className="sr-only">
               Tabel Rekapitulasi Presensi dan Kehadiran {labels.userLabel}
             </caption>
-            <thead className="bg-slate-800/80 text-slate-400 font-semibold border-b border-slate-700/80 uppercase tracking-wider text-[11px]">
+            <thead className="bg-slate-50 text-slate-500 font-bold border-b border-slate-200/80 uppercase tracking-wider text-[11px]">
               <tr>
-                <th scope="col" className="px-4 py-3">No</th>
-                <th scope="col" className="px-4 py-3">Tanggal & Waktu</th>
-                <th scope="col" className="px-4 py-3">{labels.idLabel}</th>
-                <th scope="col" className="px-4 py-3">Nama Lengkap</th>
-                <th scope="col" className="px-4 py-3">{labels.deptLabel}</th>
-                <th scope="col" className="px-4 py-3">Status</th>
-                <th scope="col" className="px-4 py-3">Lokasi</th>
-                <th scope="col" className="px-4 py-3">Verifikasi Hash</th>
+                <th scope="col" className="px-4 py-3.5">No</th>
+                <th scope="col" className="px-4 py-3.5">Tanggal & Waktu</th>
+                <th scope="col" className="px-4 py-3.5">{labels.idLabel}</th>
+                <th scope="col" className="px-4 py-3.5">Nama Lengkap</th>
+                <th scope="col" className="px-4 py-3.5">{labels.deptLabel}</th>
+                <th scope="col" className="px-4 py-3.5">Status</th>
+                <th scope="col" className="px-4 py-3.5">Lokasi</th>
+                <th scope="col" className="px-4 py-3.5">Verifikasi Hash</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-100">
               {displayedRecords.length === 0 ? (
                 <tr>
                   <td colSpan={8} className="px-4 py-12 text-center text-slate-400">
                     <div data-testid="empty-recap-state" className="space-y-2">
                       <span className="text-3xl" aria-hidden="true">📑</span>
-                      <p className="text-xs">
+                      <p className="text-xs font-medium text-slate-500">
                         {allRecords.length === 0
                           ? 'Belum ada data presensi yang tercatat'
                           : 'Tidak ditemukan data yang sesuai dengan kriteria filter'}
@@ -459,7 +459,7 @@ export function AttendanceRekap({
                           type="button"
                           data-testid="btn-reset-filters"
                           onClick={handleResetFilters}
-                          className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-sky-400 border border-slate-700 hover:bg-slate-700 cursor-pointer"
+                          className="px-3.5 py-1.5 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 cursor-pointer shadow-xs"
                         >
                           Reset Filter
                         </button>
@@ -469,33 +469,33 @@ export function AttendanceRekap({
                 </tr>
               ) : (
                 displayedRecords.map((rec, idx) => (
-                  <tr key={rec.id} data-testid={`recap-row-${rec.id}`} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="px-4 py-3 text-slate-500 font-mono">
+                  <tr key={rec.id} data-testid={`recap-row-${rec.id}`} className="hover:bg-slate-50/70 transition-colors">
+                    <td className="px-4 py-3.5 text-slate-400 font-mono font-medium">
                       {(currentPage - 1) * pageSize + idx + 1}
                     </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
-                      <div className="font-semibold text-white">{rec.date || '-'}</div>
-                      <div className="text-[10px] text-slate-400 font-mono">
+                    <td className="px-4 py-3.5 whitespace-nowrap">
+                      <div className="font-bold text-slate-900">{rec.date || '-'}</div>
+                      <div className="text-[10px] text-slate-500 font-mono">
                         {rec.time ? `${rec.time} WIB` : '-'}
                         {rec.type ? ` • ${rec.type}` : ''}
                       </div>
                     </td>
-                    <td className="px-4 py-3 font-mono font-medium text-sky-300 whitespace-nowrap">
+                    <td className="px-4 py-3.5 font-mono font-bold text-primary whitespace-nowrap">
                       {rec.userNik}
                     </td>
-                    <td className="px-4 py-3 font-semibold text-white whitespace-nowrap">
+                    <td className="px-4 py-3.5 font-bold text-slate-900 whitespace-nowrap">
                       {rec.userName}
                     </td>
-                    <td className="px-4 py-3 text-slate-300 whitespace-nowrap">
+                    <td className="px-4 py-3.5 text-slate-600 whitespace-nowrap font-medium">
                       {rec.department}
                     </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
+                    <td className="px-4 py-3.5 whitespace-nowrap">
                       <Badge>{rec.status}</Badge>
                     </td>
-                    <td className="px-4 py-3 text-slate-400 max-w-xs truncate">
+                    <td className="px-4 py-3.5 text-slate-500 max-w-xs truncate">
                       {rec.coordinates?.address || (rec.coordinates ? `${rec.coordinates.lat}, ${rec.coordinates.lng}` : '-')}
                     </td>
-                    <td className="px-4 py-3 font-mono text-emerald-400 text-[11px] max-w-[140px] truncate">
+                    <td className="px-4 py-3.5 font-mono text-emerald-600 text-[11px] max-w-[140px] truncate font-semibold">
                       {rec.authHash ? `#${rec.authHash}` : '-'}
                     </td>
                   </tr>
@@ -509,17 +509,17 @@ export function AttendanceRekap({
         {totalPages > 1 && (
           <div
             data-testid="pagination-bar"
-            className="px-4 py-3 bg-slate-800/40 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400"
+            className="px-4 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium"
           >
             <span>
-              Halaman {currentPage} dari {totalPages} ({filteredRecords.length} Data)
+              Halaman <strong className="text-slate-800">{currentPage}</strong> dari {totalPages} ({filteredRecords.length} Data)
             </span>
             <div className="flex gap-1.5">
               <button
                 type="button"
                 disabled={currentPage <= 1}
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-white cursor-pointer"
+                className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 disabled:opacity-40 disabled:cursor-not-allowed text-slate-700 font-bold cursor-pointer transition-all shadow-xs"
               >
                 Sebelumnya
               </button>
@@ -527,7 +527,7 @@ export function AttendanceRekap({
                 type="button"
                 disabled={currentPage >= totalPages}
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-white cursor-pointer"
+                className="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 disabled:opacity-40 disabled:cursor-not-allowed text-slate-700 font-bold cursor-pointer transition-all shadow-xs"
               >
                 Selanjutnya
               </button>
@@ -540,22 +540,22 @@ export function AttendanceRekap({
       {allRecords.length > 0 && filteredLeaves.length > 0 && (
         <div
           data-testid="recap-leaves-section"
-          className="p-4 rounded-2xl glass-panel bg-slate-900/80 border border-slate-800 space-y-3"
+          className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm space-y-4"
         >
-          <div className="flex items-center justify-between">
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
               Ringkasan Pengajuan Cuti & Perizinan ({filteredLeaves.length})
             </h4>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredLeaves.slice(0, 6).map((lve) => (
               <div
                 key={lve.id}
                 data-testid={`leave-recap-item-${lve.id}`}
-                className="p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 flex flex-col gap-1 text-xs"
+                className="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 hover:bg-white hover:shadow-xs flex flex-col gap-1.5 text-xs transition-all"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-semibold text-white truncate">{lve.userName}</span>
+                  <span className="font-bold text-slate-900 truncate">{lve.userName}</span>
                   <Badge
                     variant={
                       lve.status === 'approved'
@@ -572,7 +572,7 @@ export function AttendanceRekap({
                         : 'Menunggu'}
                   </Badge>
                 </div>
-                <div className="text-[11px] text-slate-400">
+                <div className="text-[11px] text-slate-500 font-medium">
                   {lve.typeLabel || lve.type} • {lve.startDate} s/d {lve.endDate} ({lve.durationDays || 1} hr)
                 </div>
               </div>

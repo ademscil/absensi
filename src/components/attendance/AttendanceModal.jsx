@@ -160,21 +160,21 @@ export function AttendanceModal({
     >
       <div className="space-y-4">
         {/* Status Indicators */}
-        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-800/60 text-xs">
+        <div className="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs">
           <div>
-            <span className="text-slate-400">Radius Kantor: </span>
+            <span className="text-slate-500 font-medium">Radius Kantor: </span>
             <span
               data-testid="geofence-status"
-              className={withinGeofence ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}
+              className={withinGeofence ? 'text-emerald-600 font-bold' : 'text-amber-600 font-bold'}
             >
               {withinGeofence ? 'Dalam Radius Kantor' : 'Luar Radius'}
             </span>
           </div>
           <div>
-            <span className="text-slate-400">Ketepatan: </span>
+            <span className="text-slate-500 font-medium">Ketepatan: </span>
             <span
               data-testid="punctuality-status"
-              className={punctuality === 'Tepat Waktu' ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold'}
+              className={punctuality === 'Tepat Waktu' ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}
             >
               {punctuality}
             </span>
@@ -188,7 +188,7 @@ export function AttendanceModal({
           <div className="space-y-3">
             <div
               data-testid="watermark-preview-screen"
-              className="relative rounded-2xl overflow-hidden border border-slate-700 bg-black aspect-[4/3]"
+              className="relative rounded-2xl overflow-hidden border border-slate-200 bg-black aspect-[4/3] shadow-md"
             >
               <img
                 src={previewPhoto}
@@ -198,7 +198,7 @@ export function AttendanceModal({
               {celebrating && (
                 <div
                   data-testid="celebration-animation"
-                  className="absolute inset-0 bg-slate-950/80 backdrop-blur-md flex flex-col items-center justify-center text-white z-20"
+                  className="absolute inset-0 bg-slate-900/80 backdrop-blur-md flex flex-col items-center justify-center text-white z-20"
                 >
                   <div className="w-20 h-20 max-w-full max-h-full overflow-hidden shrink-0 rounded-full bg-emerald-500/20 border-2 border-emerald-500/40 flex items-center justify-center mb-3 shadow-[0_0_24px_rgba(16,185,129,0.35)]">
                     <svg width="48" height="48" className="w-12 h-12 max-w-full max-h-full shrink-0 text-emerald-400" viewBox="0 0 52 52">
@@ -214,7 +214,7 @@ export function AttendanceModal({
                     </svg>
                   </div>
                   <span className="text-base font-bold tracking-wide text-emerald-300">Presensi Berhasil!</span>
-                  <span className="text-xs text-slate-400 mt-1">Data kehadiran telah tersimpan</span>
+                  <span className="text-xs text-slate-300 mt-1">Data kehadiran telah tersimpan</span>
                 </div>
               )}
             </div>
@@ -223,7 +223,7 @@ export function AttendanceModal({
               <button
                 type="button"
                 onClick={() => setPreviewPhoto(null)}
-                className="flex-1 py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all cursor-pointer"
+                className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 transition-all cursor-pointer"
               >
                 Foto Ulang
               </button>
@@ -232,7 +232,7 @@ export function AttendanceModal({
                 onClick={handleConfirmSubmit}
                 disabled={processing || celebrating}
                 data-testid="btn-submit-attendance"
-                className="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-white bg-primary hover:brightness-110 shadow-glow transition-all cursor-pointer disabled:opacity-50"
+                className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-primary hover:brightness-105 shadow-md shadow-primary/20 transition-all cursor-pointer disabled:opacity-50"
               >
                 Kirim Presensi
               </button>

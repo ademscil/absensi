@@ -54,8 +54,10 @@ function MainAppShell() {
   };
 
   return (
-    <div className="app-shell min-h-[100dvh] flex flex-col bg-slate-950/35 text-slate-100 relative z-0">
-      <SpatialBackground data-testid="spatial-background" />
+    <div className="app-shell min-h-[100dvh] flex flex-col bg-slate-50 text-slate-800 relative z-0">
+      <div className="fixed inset-0 pointer-events-none opacity-20 overflow-hidden">
+        <SpatialBackground data-testid="spatial-background" />
+      </div>
 
       {/* Persistent Shell Header */}
       <Header />
@@ -66,42 +68,104 @@ function MainAppShell() {
         <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
 
         {/* Dynamic Role-Based View Container */}
-        <main className="flex-1 min-w-0 w-full p-4 sm:p-6 overflow-y-auto">
+        <main className="flex-1 min-w-0 w-full p-4 sm:p-6 lg:p-8 overflow-y-auto">
           {role === 'karyawan' ? (
             <>
               {activeTab === 'presensi' && (
-                <div className="space-y-6 max-w-2xl mx-auto">
+                <div className="space-y-6 max-w-3xl mx-auto">
                   {/* Action Banner Card */}
-                  <SpatialCard className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 text-center space-y-4">
-                    <div className="w-16 h-16 mx-auto rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-3xl">
-                      📷
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-bold text-white">Presensi Kehadiran Harian</h2>
-                      <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
-                        Lakukan selfie wajah ber-watermark untuk verifikasi kehadiran resmi
-                      </p>
+                  <div
+                    data-testid="spatial-card"
+                    className="rounded-3xl bg-white border border-slate-200/90 shadow-sm p-6 sm:p-8 space-y-6 relative overflow-hidden"
+                  >
+                    {/* Decorative ambient gradient backdrop */}
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-blue-50/70 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-80 h-80 bg-indigo-50/50 rounded-full blur-3xl pointer-events-none" />
+
+                    {/* Top Header Row with Status Pill & Greeting */}
+                    <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                            Portal Presensi Karyawan
+                          </span>
+                        </div>
+                        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight mt-1">
+                          Presensi Kehadiran Harian
+                        </h2>
+                        <p className="text-xs text-slate-500 mt-1 max-w-lg leading-relaxed">
+                          Lakukan selfie wajah ber-watermark untuk verifikasi kehadiran resmi dengan stempel waktu WIB & GPS.
+                        </p>
+                      </div>
+                      <div className="shrink-0">
+                        <div className="px-3.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs font-semibold text-slate-700 flex items-center gap-2 shadow-xs">
+                          <span>🕒</span>
+                          <span>Shift Reguler (08:00 - 17:00 WIB)</span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                    {/* Action Buttons: Masuk & Pulang */}
+                    <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                       <button
                         type="button"
                         data-testid="btn-open-masuk"
                         onClick={() => handleOpenAttendance('MASUK')}
-                        className="py-3 px-6 rounded-2xl font-bold text-xs text-white bg-primary hover:brightness-110 shadow-glow transition-all cursor-pointer"
+                        className="group relative p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold shadow-md shadow-blue-500/20 active:scale-[0.99] transition-all cursor-pointer flex items-center gap-3.5 text-left"
                       >
-                        Presensi Masuk (07:00 - 08:00)
+                        <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform">
+                          📷
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-xs font-medium text-blue-100">Pagi Hari</div>
+                          <div className="text-sm font-extrabold text-white">Presensi Masuk</div>
+                          <div className="text-[11px] text-blue-200/90 mt-0.5">Jadwal: 07:00 - 08:00 WIB</div>
+                        </div>
                       </button>
+
                       <button
                         type="button"
                         data-testid="btn-open-pulang"
                         onClick={() => handleOpenAttendance('PULANG')}
-                        className="py-3 px-6 rounded-2xl font-bold text-xs text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-all cursor-pointer"
+                        className="group relative p-4 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold shadow-xs active:scale-[0.99] transition-all cursor-pointer flex items-center gap-3.5 text-left"
                       >
-                        Presensi Pulang (17:00)
+                        <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform">
+                          👋
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-xs font-medium text-slate-500">Sore Hari</div>
+                          <div className="text-sm font-extrabold text-slate-900">Presensi Pulang</div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">Mulai Pukul 17:00 WIB</div>
+                        </div>
                       </button>
                     </div>
-                  </SpatialCard>
+
+                    {/* Operational Value Pillars Strip */}
+                    <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                      <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-100 flex items-center gap-3">
+                        <span className="text-lg">🛡️</span>
+                        <div className="text-xs">
+                          <div className="font-bold text-slate-800">Watermark Anti-Fraud</div>
+                          <div className="text-slate-500 text-[11px]">Waktu & NIK dicap ke foto</div>
+                        </div>
+                      </div>
+                      <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-100 flex items-center gap-3">
+                        <span className="text-lg">📍</span>
+                        <div className="text-xs">
+                          <div className="font-bold text-slate-800">Radius Kantor Valid</div>
+                          <div className="text-slate-500 text-[11px]">Geofence lokasi terverifikasi</div>
+                        </div>
+                      </div>
+                      <div className="p-3 rounded-xl bg-slate-50/80 border border-slate-100 flex items-center gap-3">
+                        <span className="text-lg">⚡</span>
+                        <div className="text-xs">
+                          <div className="font-bold text-slate-800">Sinkronisasi Real-Time</div>
+                          <div className="text-slate-500 text-[11px]">Terhubung ke Admin HR</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Summary History */}
                   <AttendanceHistory key={refreshKey} />
@@ -109,13 +173,13 @@ function MainAppShell() {
               )}
 
               {activeTab === 'riwayat' && (
-                <div className="max-w-2xl mx-auto">
+                <div className="max-w-3xl mx-auto">
                   <AttendanceHistory key={refreshKey} />
                 </div>
               )}
 
               {activeTab === 'pengajuan' && (
-                <div className="max-w-2xl mx-auto space-y-6">
+                <div className="max-w-3xl mx-auto space-y-6">
                   <LeaveRequestForm onSubmitted={() => setRefreshKey((k) => k + 1)} />
                   <LeaveStatusList refreshKey={refreshKey} />
                 </div>

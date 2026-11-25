@@ -39,10 +39,18 @@ export function AttendanceHistory({
   });
 
   return (
-    <div data-testid={testId} className={`attendance-history space-y-4 ${className}`}>
-      <div className="flex items-center justify-between">
-        <h3 className="text-base font-bold text-white tracking-wide">Riwayat Kehadiran</h3>
-        <span className="text-xs text-slate-400">Total: {filteredRecords.length} Presensi</span>
+    <div
+      data-testid={testId}
+      className={`attendance-history bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-sm space-y-5 text-slate-800 ${className}`}
+    >
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 className="text-base font-extrabold text-slate-900 tracking-tight">Riwayat Kehadiran</h3>
+          <p className="text-xs text-slate-500 mt-0.5">Daftar presensi harian dan status verifikasi foto</p>
+        </div>
+        <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 border border-slate-200/80">
+          Total: {filteredRecords.length} Presensi
+        </span>
       </div>
 
       {/* Filter Status Pills */}
@@ -54,7 +62,7 @@ export function AttendanceHistory({
           className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             statusFilter === 'all'
               ? 'bg-primary text-white shadow-sm'
-              : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
           }`}
         >
           Semua
@@ -66,7 +74,7 @@ export function AttendanceHistory({
           className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             statusFilter === 'ontime'
               ? 'bg-emerald-600 text-white shadow-sm'
-              : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
           }`}
         >
           Tepat Waktu
@@ -78,7 +86,7 @@ export function AttendanceHistory({
           className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             statusFilter === 'late'
               ? 'bg-rose-600 text-white shadow-sm'
-              : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
           }`}
         >
           Terlambat
@@ -90,7 +98,7 @@ export function AttendanceHistory({
           className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             statusFilter === 'pulang'
               ? 'bg-sky-600 text-white shadow-sm'
-              : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'
+              : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200'
           }`}
         >
           Pulang
@@ -98,9 +106,9 @@ export function AttendanceHistory({
       </div>
 
       {filteredRecords.length === 0 ? (
-        <div className="text-center py-12 px-4 rounded-2xl bg-slate-800/40 border border-slate-700/50">
+        <div className="text-center py-12 px-4 rounded-2xl bg-slate-50 border border-slate-200">
           <span className="text-3xl">📅</span>
-          <p className="text-xs text-slate-400 mt-2">Belum ada riwayat kehadiran tercatat.</p>
+          <p className="text-xs text-slate-500 mt-2 font-medium">Belum ada riwayat kehadiran tercatat.</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -110,11 +118,11 @@ export function AttendanceHistory({
               <div
                 key={rec.id}
                 data-testid={`history-card-${rec.id}`}
-                className="p-3.5 rounded-2xl bg-slate-900/70 border border-slate-800/80 hover:border-slate-700 flex items-center justify-between gap-3 transition-all"
+                className="p-3.5 sm:p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 hover:bg-white hover:shadow-sm flex items-center justify-between gap-3 transition-all"
               >
                 {/* Photo Thumbnail */}
                 <div
-                  className="w-12 h-12 rounded-xl overflow-hidden bg-slate-800 shrink-0 border border-slate-700/60 cursor-pointer flex items-center justify-center"
+                  className="w-12 h-12 rounded-xl overflow-hidden bg-white shrink-0 border border-slate-200 cursor-pointer flex items-center justify-center shadow-xs"
                   onClick={() => setSelectedRecord(rec)}
                   data-testid="thumbnail-photo"
                 >
@@ -126,7 +134,7 @@ export function AttendanceHistory({
                       onError={() => handleImageError(rec.id)}
                     />
                   ) : (
-                    <div data-testid="photo-placeholder-avatar" className="text-lg">
+                    <div data-testid="photo-placeholder-avatar" className="text-lg text-slate-400">
                       👤
                     </div>
                   )}
@@ -135,10 +143,10 @@ export function AttendanceHistory({
                 {/* Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white truncate">{rec.date}</span>
-                    <span className="text-[11px] text-sky-400 font-mono">{rec.time}</span>
+                    <span className="text-xs font-bold text-slate-900 truncate">{rec.date}</span>
+                    <span className="text-[11px] text-primary font-mono font-semibold">{rec.time}</span>
                   </div>
-                  <p className="text-[11px] text-slate-400 truncate mt-0.5">
+                  <p className="text-[11px] text-slate-500 truncate mt-0.5">
                     {rec.coordinates?.address || 'Lokasi Terverifikasi'}
                   </p>
                 </div>
@@ -146,7 +154,7 @@ export function AttendanceHistory({
                 {/* Status Badge */}
                 <div className="shrink-0 flex flex-col items-end gap-1">
                   <Badge>{rec.status}</Badge>
-                  <span className="text-[10px] text-slate-500 uppercase">{rec.type}</span>
+                  <span className="text-[10px] text-slate-400 font-bold uppercase">{rec.type}</span>
                 </div>
               </div>
             );
@@ -163,7 +171,7 @@ export function AttendanceHistory({
       >
         {selectedRecord && (
           <div className="space-y-4">
-            <div className="aspect-[4/3] rounded-xl overflow-hidden bg-black border border-slate-700 flex items-center justify-center">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 flex items-center justify-center shadow-inner">
               {selectedRecord.photoDataUrl && !imageErrorMap[selectedRecord.id] ? (
                 <img
                   src={selectedRecord.photoDataUrl}
@@ -171,36 +179,36 @@ export function AttendanceHistory({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="text-4xl text-slate-500">👤</div>
+                <div className="text-4xl text-slate-400">👤</div>
               )}
             </div>
 
-            <div className="space-y-2 text-xs text-slate-300">
-              <div className="flex justify-between py-1 border-b border-slate-800">
-                <span className="text-slate-500">Nama:</span>
-                <span className="font-bold text-white">{selectedRecord.userName}</span>
+            <div className="space-y-2 text-xs text-slate-700 bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80">
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
+                <span className="text-slate-500">Nama Karyawan:</span>
+                <span className="font-bold text-slate-900">{selectedRecord.userName}</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800">
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
                 <span className="text-slate-500">NIK / ID:</span>
-                <span className="font-mono text-white">{selectedRecord.userNik}</span>
+                <span className="font-mono text-primary font-semibold">{selectedRecord.userNik}</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800">
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
                 <span className="text-slate-500">Waktu & Tanggal:</span>
-                <span className="text-white">{selectedRecord.date} {selectedRecord.time} WIB</span>
+                <span className="text-slate-800 font-medium">{selectedRecord.date} {selectedRecord.time} WIB</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800">
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
                 <span className="text-slate-500">Status:</span>
-                <span className="font-bold text-emerald-400">{selectedRecord.status} ({selectedRecord.type})</span>
+                <span className="font-bold text-emerald-600">{selectedRecord.status} ({selectedRecord.type})</span>
               </div>
-              <div className="flex justify-between py-1 border-b border-slate-800">
+              <div className="flex justify-between py-1 border-b border-slate-200/60">
                 <span className="text-slate-500">Koordinat GPS:</span>
-                <span className="font-mono text-sky-400">
+                <span className="font-mono text-slate-700">
                   {selectedRecord.coordinates?.lat || 0}, {selectedRecord.coordinates?.lng || 0}
                 </span>
               </div>
               <div className="flex justify-between py-1">
-                <span className="text-slate-500">Auth Hash:</span>
-                <span className="font-mono text-emerald-400">#{selectedRecord.authHash}</span>
+                <span className="text-slate-500">Kode Hash Bukti:</span>
+                <span className="font-mono text-emerald-600 font-semibold">#{selectedRecord.authHash}</span>
               </div>
             </div>
           </div>

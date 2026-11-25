@@ -37,12 +37,12 @@ export function Sidebar({
   return (
     <aside
       data-testid={testId}
-      className={`desktop-sidebar hidden md:flex flex-col w-64 border-r border-slate-800/80 bg-slate-900/60 backdrop-blur-md p-4 shrink-0 transition-all ${className}`}
+      className={`desktop-sidebar hidden md:flex flex-col w-64 border-r border-slate-200/80 bg-white p-4 shrink-0 transition-all shadow-xs ${className}`}
     >
       {/* Current User Profile Card */}
-      <div className="mb-6 px-3.5 py-3 rounded-2xl bg-slate-800/60 border border-slate-700/50 shadow-sm">
+      <div className="mb-5 px-3.5 py-3 rounded-2xl bg-slate-50 border border-slate-200/80 shadow-xs">
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">
+          <span className="text-[10px] text-slate-400 uppercase tracking-wider font-bold">
             {labels.userLabel} Aktif
           </span>
           <Badge
@@ -52,13 +52,13 @@ export function Sidebar({
             {role === 'admin' ? 'Admin' : 'Staff'}
           </Badge>
         </div>
-        <div className="text-sm font-bold text-white truncate">
+        <div className="text-sm font-bold text-slate-900 truncate">
           {currentUser?.name || 'User'}
         </div>
-        <div className="text-xs text-sky-400 truncate mt-0.5">
+        <div className="text-xs text-primary font-semibold truncate mt-0.5">
           {labels.idLabel}: {currentUser?.nik || '-'}
         </div>
-        <div className="text-[11px] text-slate-400 truncate mt-0.5">
+        <div className="text-[11px] text-slate-500 truncate mt-0.5">
           {currentUser?.department || '-'}
         </div>
       </div>
@@ -75,8 +75,8 @@ export function Sidebar({
               onClick={() => onTabChange && onTabChange(item.id)}
               className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 text-left cursor-pointer ${
                 isActive
-                  ? 'bg-primary text-white shadow-glow scale-[1.01]'
-                  : 'text-slate-300 hover:bg-slate-800/60 hover:text-white'
+                  ? 'bg-blue-50 text-primary border border-blue-100 shadow-xs scale-[1.01]'
+                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
               }`}
             >
               <span className="text-base">{item.icon}</span>
